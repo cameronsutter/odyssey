@@ -7,9 +7,9 @@ Gem::Specification.new do |spec|
   spec.name          = "odyssey"
   spec.version       = Odyssey::VERSION
   spec.authors       = ["Cameron Sutter"]
-  spec.email         = ["csutter@instructure.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.email         = ["cameronsutter0@gmail.com"]
+  spec.description   = %q{TODO: Text readability analyzer}
+  spec.summary       = %q{TODO: Uses readibility formulas (e.g. Flesch-Kincaid) to analze text and give a score}
   spec.homepage      = ""
   spec.license       = "MIT"
 

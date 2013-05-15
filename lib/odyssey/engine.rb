@@ -14,10 +14,8 @@ module Odyssey
 
     def initialize(formula_name)
       reset
-
       klass = Module.const_get formula_name
       @formula = klass.new
-
     end
 
     def score(text)
@@ -34,7 +32,7 @@ module Odyssey
     end
 
     def string_length(text)
-
+      text.length
     end
 
     def letter_count(text)

@@ -2,8 +2,13 @@ require "odyssey/version"
 
 module Odyssey
 
-  #main function
-  def self.analyze(text, formula_name = 'Flesch_kincaid_RE', all_stats = false)
+  DEFAULT_FORMULA = 'Flesch_kincaid_RE'
+
+  #main method
+  def self.analyze(text, formula_name = DEFAULT_FORMULA, all_stats = false)
+    #catch nils
+    formula_name = DEFAULT_FORMULA if formula_name == nil
+    
     @engine = Odyssey::Engine.new(formula_name)
     score = @engine.score(text)
     
@@ -17,20 +22,33 @@ module Odyssey
     output
   end
 
-  def self.version_string
-    "#{Odyssey::VERSION}"
+  #run whatever method was given as if it were a shortcut to a formula
+  def self.method_missing(*args)
+    method_string = args[0].to_s
+
+    #capitalize the first letter
+    first_letter = method_string[0].upcase
+    method_string[0] = first_letter
+
+    #send to the main method
+    analyze(args[1], method_string, args[2] || false)
   end
 
-  #############################################
-  # pre-built functions that act as shortcuts #
-  #############################################
+  #define this here, so it doesn't get sent to method_missing()
+  def self.to_ary
+    []
+  end
+
+  #######################################################
+  # pre-built methods that act as shortcuts to formulas #
+  #######################################################
   
   def self.flesch_kincaid_reading_ease(text, all_stats = false)
-    self.analyze(text, 'Flesch_kincaid_RE', all_stats)
+    analyze(text, 'Flesch_kincaid_RE', all_stats)
   end
 
   def self.flesch_kincaid_grade_level(text, all_stats = false)
-    self.analyze(text, 'Flesch_kincaid_GL', all_stats)
+    analyze(text, 'Flesch_kincaid_GL', all_stats)
   end
   
 end
