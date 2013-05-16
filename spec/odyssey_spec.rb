@@ -9,7 +9,7 @@ describe Odyssey do
     end
 
     describe 'get all stats' do
-      before do
+      before :all do
         @simple = Odyssey.analyze one_simple_sentence, nil, true
         @double = Odyssey.analyze two_simple_sentences, nil, true
       end
@@ -54,9 +54,24 @@ describe Odyssey do
   end
 
   context 'flesch_kincaid_reading_ease' do
-    it 'should return something' do
-      result = Odyssey.flesch_kincaid_reading_ease one_simple_sentence
-      result.should_not be_nil
+
+    describe 'get only score' do
+      before :all do
+        @simple = Odyssey.flesch_kincaid_reading_ease one_simple_sentence
+        @double = Odyssey.flesch_kincaid_reading_ease two_simple_sentences
+        @complex = Odyssey.flesch_kincaid_reading_ease one_complex_sentence
+        @complex_double = Odyssey.flesch_kincaid_reading_ease two_complex_sentences
+      end
+      it 'should return something' do
+        @simple.should_not be_nil
+      end
+
+      it 'should return the score' do
+        @simple.should == 119.2
+        @double.should == 119.2
+        @complex.should == 94.3
+        @complex_double.should == 88.7
+      end
     end
 
     describe 'get all stats' do
@@ -69,7 +84,7 @@ describe Odyssey do
       end
 
       it 'should return score' do
-        @result['score'].should == one_simple_sentence
+        @result['score'].should == 119.2
       end
     end
   end
@@ -78,6 +93,9 @@ describe Odyssey do
     it 'should run any formula' do
       result = Odyssey.fake_formula one_simple_sentence, true
       result['name'].should == "It's fake"
+
+      result = Odyssey.no_existe one_simple_sentence, true
+      result['name'].should == "Generic"
     end
   end
 end

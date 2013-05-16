@@ -31,14 +31,14 @@ module Odyssey
 
       #first get the all the statistics
       @stats = {
-        'string_length' = string_length(text),
-        'letter_count' = letter_count(text),
-        'syllable_count' = syllable_count(text),
-        'word_count' = word_count(text),
-        'sentence_count' = sentence_count(text),
-        'average_words_per_sentence' = average_words_per_sentence(text),
-        'average_syllables_per_word' = average_syllables_per_word(text)
+        'string_length' => string_length(text),
+        'letter_count' => letter_count(text),
+        'syllable_count' => syllable_count(text),
+        'word_count' => word_count(text),
+        'sentence_count' => sentence_count(text)
       }
+      @stats['average_words_per_sentence'] = average_words_per_sentence(text)
+      @stats['average_syllables_per_word'] = average_syllables_per_word(text)
 
       #now run all that through the formula
       @score = @formula.score(text, @stats)
@@ -70,11 +70,11 @@ module Odyssey
     end
 
     def average_words_per_sentence(text)
-      @word_count / @sentence_count
+      @stats['word_count'].to_f / @stats['sentence_count'].to_f
     end
 
     def average_syllables_per_word(text)
-      @syllable_count / @word_count
+      @stats['syllable_count'].to_f / @stats['word_count'].to_f
     end
 
     # for now this just removes html tags
