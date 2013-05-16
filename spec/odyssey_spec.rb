@@ -26,6 +26,12 @@ describe Odyssey do
         @simple['syllable_count'].should == 3
       end
 
+      it 'should return word count' do
+        @simple['word_count'].should == 3
+
+        @double['word_count'].should == 6
+      end
+
       it 'should return sentence count' do
         @simple['sentence_count'].should == 1
 
