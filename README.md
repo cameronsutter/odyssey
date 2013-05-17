@@ -59,7 +59,8 @@ To extend Odyssey, you can create a class that inherits from Formula.
       end
     end
 
-    text will be a Hash like so:
+text will be a Hash like so:
+
     data = {
       'raw' => String,
       'words' => Array,
@@ -67,7 +68,8 @@ To extend Odyssey, you can create a class that inherits from Formula.
       'syllables' => Array
     }
 
-    stats will be a Hash like so:
+stats will be a Hash like so:
+
     {
       'string_length' => Fixnum,
       'letter_count' => Fixnum,
