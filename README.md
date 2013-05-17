@@ -20,15 +20,16 @@ Or install it yourself as:
 
 require 'odyssey'
 
-Odyssey.<formula_name>(text, all_stats)
+Odyssey.formula_name(text, all_stats)
 
-e.g. Odyssey.flesch_kincaid_re("See Spot run.", true)
+e.g. <code>Odyssey.flesch_kincaid_re("See Spot run.", true)</code>
 
 if all_stats is false, this returns a simple score. If it is true, it returns a Hash:
 
+<code>
 { 
   'name'                       => String,
-  'formula'                    => <formula_class>,
+  'formula'                    => formula_class,
   'score'                      => Float,
   'string_length'              => Fixnum,
   'letter_count'               => Fixnum,
@@ -39,11 +40,12 @@ if all_stats is false, this returns a simple score. If it is true, it returns a 
   'average_words_per_sentence' => Float,
   'average_syllables_per_word' => Float
 }
+</code>
 
 ##Extending Odyssey
 
 To extend Odyssey, you can create a class that inherits from Formula.
-
+<code>
 class Cool_new_formula < Formula
   
   def score(text, stats)
@@ -55,7 +57,7 @@ class Cool_new_formula < Formula
   end
 end
 
-text will be a Hash like so:
+#text will be a Hash like so:
 data = {
   'raw' => String,
   'words' => Array,
@@ -63,7 +65,7 @@ data = {
   'syllables' => Array
 }
 
-stats will be a Hash like so:
+#stats will be a Hash like so:
 {
   'string_length' => Fixnum,
   'letter_count' => Fixnum,
@@ -73,11 +75,11 @@ stats will be a Hash like so:
   'average_words_per_sentence' => Float,
   'average_syllables_per_word' => Float
 }
-
+</code>
 That is all you need.
 To call your formula you just use 
 
-Odyssey.cool_new_formula('See Spot run.', true)
+<code>Odyssey.cool_new_formula('See Spot run.', true)</code>
 
 Because you have access to the formula's class (when the 'all_stats' flag is true),
 you have access to any other methods or class variables.
