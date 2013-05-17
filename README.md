@@ -18,29 +18,30 @@ Or install it yourself as:
 
 ## Usage
 
-<pre><code>require 'odyssey'
+    require 'odyssey'
 
-Odyssey.formula_name(text, all_stats)</code></pre>
+    Odyssey.formula_name(text, all_stats)
 
-e.g. <code>Odyssey.flesch_kincaid_re("See Spot run.", true)</code>
+Example:
+    Odyssey.flesch_kincaid_re("See Spot run.", true)
 
 if all_stats is false, this returns a simple score. If it is true, it returns a Hash:
 
-<pre><code>
-{
-  'name'                       => String,
-  'formula'                    => formula_class,
-  'score'                      => Float,
-  'string_length'              => Fixnum,
-  'letter_count'               => Fixnum,
-  'syllable_count'             => Fixnum,
-  'word_count'                 => Fixnum,
-  'sentence_count'             => Fixnum,
-  'sentence_count'             => Fixnum,
-  'average_words_per_sentence' => Float,
-  'average_syllables_per_word' => Float
-}
-</code></pre>
+
+    {
+      'name'                       => String,
+      'formula'                    => formula_class,
+      'score'                      => Float,
+      'string_length'              => Fixnum,
+      'letter_count'               => Fixnum,
+      'syllable_count'             => Fixnum,
+      'word_count'                 => Fixnum,
+      'sentence_count'             => Fixnum,
+      'sentence_count'             => Fixnum,
+      'average_words_per_sentence' => Float,
+      'average_syllables_per_word' => Float
+    }
+
 
 ##Extending Odyssey
 
