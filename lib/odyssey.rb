@@ -50,7 +50,23 @@ module Odyssey
   def self.flesch_kincaid_grade_level(text, all_stats = false)
     analyze(text, 'Flesch_kincaid_GL', all_stats)
   end
-  
+
+  def self.gunning_fog(text, all_stats = false)
+    analyze(text, 'Gunning_fog', all_stats)
+  end
+
+  def self.coleman_liau(text, all_stats = false)
+    analyze(text, 'Coleman_liau', all_stats)
+  end
+
+  def self.smog(text, all_stats = false)
+    analyze(text, 'Smog', all_stats)
+  end
+
+  def self.ari(text, all_stats = false)
+    analyze(text, 'Automated_readability', all_stats)
+  end
+
 end
 
 require 'require_all'

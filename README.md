@@ -1,6 +1,6 @@
 # Odyssey
 
-Odyssey is a text analyzing gem that outputs the readability score of text. It has available several of the common readability measures, but defaults to the Flesch-Kincaid Reading Ease test.
+Odyssey is an extendible text analyzing gem that outputs the readability score of text. It has several of the common readability measures available, but defaults to the Flesch-Kincaid Reading Ease score.
 
 ## Installation
 
@@ -19,6 +19,10 @@ Or install it yourself as:
 ## Usage
 
 TODO: Write usage instructions here
+
+##Extending Odyssey
+
+TODO: Write extending instructions here
 
 ## Contributing
 

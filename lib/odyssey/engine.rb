@@ -5,6 +5,9 @@ module Odyssey
     @formula
     @score
     @stats
+    @words
+    @sentences
+    @syllables
 
     #regex
     LETTER_REGEX = /[A-z]/
@@ -29,19 +32,28 @@ module Odyssey
       #sanitize the text
       text = sanitize(_text)
 
-      #first get the all the statistics
+      #first get all the statistics
       @stats = {
         'string_length' => string_length(text),
         'letter_count' => letter_count(text),
-        'syllable_count' => syllable_count(text),
         'word_count' => word_count(text),
-        'sentence_count' => sentence_count(text)
+        'syllable_count' => syllable_count(text),
+        'sentence_count' => sentence_count(text),
       }
+      
       @stats['average_words_per_sentence'] = average_words_per_sentence(text)
       @stats['average_syllables_per_word'] = average_syllables_per_word(text)
 
+      #prepare the parameter to the score method
+      data = {
+        'raw' => text,
+        'words' => @words,
+        'sentences' => @sentences,
+        'syllables' => @syllables
+      }
+
       #now run all that through the formula
-      @score = @formula.score(text, @stats)
+      @score = @formula.score(data, @stats)
     end
 
     def string_length(text)
@@ -49,24 +61,28 @@ module Odyssey
     end
 
     def letter_count(text)
-      match_count(text, LETTER_REGEX)
+      matches = text.scan LETTER_REGEX
+      matches.size
     end
 
     def syllable_count(text)
       count = 0
-      words = text.scan WORD_REGEX
-      words.each do |w|
-        count += analyze_syllables(w)
+      @words.each do |w|
+        num = analyze_syllables(w)
+        count += num
+        @syllables << num
       end
       count
     end
 
     def word_count(text)
-      match_count(text, WORD_REGEX)
+      @words = text.scan WORD_REGEX
+      @words.size
     end
 
     def sentence_count(text)
-      match_count(text, SENTENCE_REGEX)
+      @sentences = text.scan SENTENCE_REGEX
+      @sentences.size
     end
 
     def average_words_per_sentence(text)
@@ -81,11 +97,6 @@ module Odyssey
     # but it could do more in the future
     def sanitize(text)
       output = text.gsub(/<\/?[^>]+>/, '')
-    end
-
-    def match_count(text, regex)
-      matches = text.scan regex
-      matches.size
     end
 
     def analyze_syllables(_word)
@@ -127,6 +138,9 @@ module Odyssey
       @formula = nil
       @score = 0
       @stats = {}
+      @words = nil
+      @sentences = nil
+      @syllables = []
     end
 
   end
