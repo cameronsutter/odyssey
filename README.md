@@ -18,64 +18,64 @@ Or install it yourself as:
 
 ## Usage
 
-<code>require 'odyssey'</code>
+<pre><code>require 'odyssey'
 
-<code>Odyssey.formula_name(text, all_stats)</code>
+Odyssey.formula_name(text, all_stats)</code></pre>
 
 e.g. <code>Odyssey.flesch_kincaid_re("See Spot run.", true)</code>
 
 if all_stats is false, this returns a simple score. If it is true, it returns a Hash:
 
-<code>
-{<br>
-  'name'                       => String,<br>
-  'formula'                    => formula_class,<br>
-  'score'                      => Float,<br>
-  'string_length'              => Fixnum,<br>
-  'letter_count'               => Fixnum,<br>
-  'syllable_count'             => Fixnum,<br>
-  'word_count'                 => Fixnum,<br>
-  'sentence_count'             => Fixnum,<br>
-  'sentence_count'             => Fixnum,<br>
-  'average_words_per_sentence' => Float,<br>
-  'average_syllables_per_word' => Float<br>
+<pre><code>
+{
+  'name'                       => String,
+  'formula'                    => formula_class,
+  'score'                      => Float,
+  'string_length'              => Fixnum,
+  'letter_count'               => Fixnum,
+  'syllable_count'             => Fixnum,
+  'word_count'                 => Fixnum,
+  'sentence_count'             => Fixnum,
+  'sentence_count'             => Fixnum,
+  'average_words_per_sentence' => Float,
+  'average_syllables_per_word' => Float
 }
-</code>
+</code></pre>
 
 ##Extending Odyssey
 
 To extend Odyssey, you can create a class that inherits from Formula.
-<code>
-class Cool_new_formula < Formula<br>
-<br>
-  def score(text, stats)<br>
-<br>
-  end<br>
-<br>
-  def name<br>
-    "Cool new formula"<br>
-  end<br>
-end<br>
+<pre><code>
+class Cool_new_formula < Formula
 
-text will be a Hash like so:<br>
-data = {<br>
-  'raw' => String,<br>
-  'words' => Array,<br>
-  'sentences' => Array,<br>
-  'syllables' => Array<br>
-}<br>
+  def score(text, stats)
 
-stats will be a Hash like so:<br>
-{<br>
-  'string_length' => Fixnum,<br>
-  'letter_count' => Fixnum,<br>
-  'syllable_count' => Fixnum,<br>
-  'word_count' => Fixnum,<br>
-  'sentence_count' => Fixnum,<br>
-  'average_words_per_sentence' => Float,<br>
-  'average_syllables_per_word' => Float<br>
+  end
+
+  def name
+    "Cool new formula"
+  end
+end
+
+text will be a Hash like so:
+data = {
+  'raw' => String,
+  'words' => Array,
+  'sentences' => Array,
+  'syllables' => Array
 }
-</code>
+
+stats will be a Hash like so:
+{
+  'string_length' => Fixnum,
+  'letter_count' => Fixnum,
+  'syllable_count' => Fixnum,
+  'word_count' => Fixnum,
+  'sentence_count' => Fixnum,
+  'average_words_per_sentence' => Float,
+  'average_syllables_per_word' => Float
+}
+</code></pre>
 That is all you need.
 To call your formula you just use 
 
