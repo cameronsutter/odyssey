@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Odyssey::VERSION
   spec.authors       = ["Cameron Sutter"]
   spec.email         = ["cameronsutter0@gmail.com"]
-  spec.description   = %q{TODO: Text readability analyzer}
-  spec.summary       = %q{TODO: Uses readibility formulas (e.g. Flesch-Kincaid) to analze text and give a score}
+  spec.description   = %q{Odyssey is an extendible text analyzing gem that outputs the readability score of text. It has several of the common readability formulas available, but defaults to the Flesch-Kincaid Reading Ease score.}
+  spec.summary       = %q{Text readability analyzer using Flesch-Kincaid and others}
   spec.homepage      = ""
   spec.license       = "MIT"
 
