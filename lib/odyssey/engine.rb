@@ -128,7 +128,6 @@ module Odyssey
         'syllable_count' => @stats['syllable_count'],
         'word_count'     => @stats['word_count'],
         'sentence_count' => @stats['sentence_count'],
-        'sentence_count' => @stats['sentence_count'],
         'average_words_per_sentence' => @stats['average_words_per_sentence'],
         'average_syllables_per_word' => @stats['average_syllables_per_word']
       }
