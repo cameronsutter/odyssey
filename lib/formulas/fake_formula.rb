@@ -1,4 +1,4 @@
-class Fake_formula < Formula
+class FakeFormula < Formula
 
   def score(text, stats)
     text

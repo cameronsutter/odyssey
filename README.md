@@ -47,7 +47,7 @@ if all_stats is false, this returns a simple score. If it is true, it returns a 
 
 To extend Odyssey, you can create a class that inherits from Formula.
 
-    class Cool_new_formula < Formula
+    class CoolNewFormula < Formula
 
       def score(text, stats)
 

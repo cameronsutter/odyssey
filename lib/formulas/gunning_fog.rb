@@ -1,4 +1,4 @@
-class Gunning_fog < Formula
+class GunningFog < Formula
 
   def score(text, stats)
     percent = three_syllables(stats['word_count'], text['syllables'])
