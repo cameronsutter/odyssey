@@ -1,4 +1,4 @@
-class Flesch_kincaid_RE < Formula
+class FleschKincaidRe < Formula
 
   def score(text, stats)
     calc_score(stats['average_words_per_sentence'], stats['average_syllables_per_word'])

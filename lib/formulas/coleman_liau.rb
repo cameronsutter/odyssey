@@ -1,4 +1,4 @@
-class Coleman_liau < Formula
+class ColemanLiau < Formula
 
   def score(text, stats)
     calc_score(stats['letter_count'], stats['word_count'], stats['sentence_count'])
