@@ -25,7 +25,7 @@ module Odyssey
   #run whatever method was given as if it were a shortcut to a formula
   def self.method_missing(*args)
     #send to the main method
-    formula_class = args[0].to_s.split("_").map { |s| s.capitalize! }.join
+    formula_class = args[0].to_s.split("_").each { |s| s.capitalize! }.join
     analyze(args[1], formula_class, args[2] || false)
   end
 
