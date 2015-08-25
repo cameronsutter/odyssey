@@ -10,3 +10,12 @@ end
 
 desc "Run tests"
 task :default => :spec
+
+task :console do
+  require 'pry'
+  require 'awesome_print'
+  require 'odyssey'
+  AwesomePrint.pry!
+  ARGV.clear
+  Pry.start
+end
