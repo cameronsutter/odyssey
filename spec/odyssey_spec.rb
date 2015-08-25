@@ -221,9 +221,8 @@ describe Odyssey do
       result['name'].should == "It's fake"
     end
 
-    it 'should default to Formula for a formula that does not exist' do
-      result = Odyssey.no_existe one_simple_sentence, true
-      result['name'].should == "Generic"
+    it 'should raise an error for a formula that does not exist' do
+      expect { Odyssey.no_existe one_simple_sentence, true }.to raise_error(NoMethodError)
     end
   end
 end
