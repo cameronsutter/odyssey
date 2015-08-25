@@ -6,8 +6,7 @@ module Odyssey
 
   #main method
   def self.analyze(text, formula_name = DEFAULT_FORMULA, all_stats = false)
-    #catch nils
-    formula_name = DEFAULT_FORMULA if formula_name == nil
+    formula_name ||= DEFAULT_FORMULA
     
     @engine = Odyssey::Engine.new(formula_name)
     score = @engine.score(text)
