@@ -215,6 +215,45 @@ describe Odyssey do
 
   end
 
+  context 'Run multiple formulas' do
+
+    describe 'get scores' do
+      before :all do
+        formula_names = [ 'Ari',
+                          'ColemanLiau',
+                          'FleschKincaidGl',
+                          'FleschKincaidRe',
+                          'GunningFog']
+
+        @simple = Odyssey.analyze_multi one_simple_sentence, formula_names
+        @double, @stats = Odyssey.analyze_multi two_simple_sentences, formula_names, true
+      end
+
+      it 'should return something' do
+        @simple.should_not be_nil
+      end
+
+      it 'should return the scores' do
+        @simple['Ari'].should             == -4.2
+        @simple['ColemanLiau'].should     == 3.7
+        @simple['FleschKincaidGl'].should == -2.6
+        @simple['FleschKincaidRe'].should == 119.2
+        @simple['GunningFog'].should      == 1.2
+      end
+
+      it 'should return some stats' do
+        @stats['score'].should == 1.2
+        @stats['name'].should == 'Gunning-Fog Score'
+        @stats['word_count'].should == 6
+      end
+    end
+
+    it 'should raise an error for empty formula list' do
+      expect { Odyssey.analyze_multi one_simple_sentence, []}.to raise_error(ArgumentError)
+    end
+
+  end
+
   describe 'plugin formulas' do
     it 'should run any formula using a shortcut method' do
       result = Odyssey.fake_formula one_simple_sentence, true

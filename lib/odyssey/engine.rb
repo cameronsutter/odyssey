@@ -1,13 +1,14 @@
 module Odyssey
   class Engine
 
-    #class variables
+    #instance variables
     @formula
     @score
     @stats
     @words
     @sentences
     @syllables
+    @data
 
     #regex
     LETTER_REGEX = /[A-z]/
@@ -22,38 +23,44 @@ module Odyssey
 
     def initialize(formula_name)
       reset
+      update_formula(formula_name)
+    end
+
+    def update_formula(formula_name)
       klass = Module.const_get formula_name
       @formula = klass.new
     rescue
       @formula = Formula.new
     end
 
-    def score(_text)
-      #sanitize the text
-      text = sanitize(_text)
+    def score(_text, analyze = true)
+      if analyze
+        #sanitize the text
+        text = sanitize(_text)
 
-      #first get all the statistics
-      @stats = {
-        'string_length' => string_length(text),
-        'letter_count' => letter_count(text),
-        'word_count' => word_count(text),
-        'syllable_count' => syllable_count(text),
-        'sentence_count' => sentence_count(text),
-      }
-      
-      @stats['average_words_per_sentence'] = average_words_per_sentence(text)
-      @stats['average_syllables_per_word'] = average_syllables_per_word(text)
+        #first get all the statistics
+        @stats = {
+          'string_length' => string_length(text),
+          'letter_count' => letter_count(text),
+          'word_count' => word_count(text),
+          'syllable_count' => syllable_count(text),
+          'sentence_count' => sentence_count(text),
+        }
 
-      #prepare the parameter to the score method
-      data = {
-        'raw' => text,
-        'words' => @words,
-        'sentences' => @sentences,
-        'syllables' => @syllables
-      }
+        @stats['average_words_per_sentence'] = average_words_per_sentence(text)
+        @stats['average_syllables_per_word'] = average_syllables_per_word(text)
+
+        #prepare the parameter to the score method
+        @data = {
+          'raw' => text,
+          'words' => @words,
+          'sentences' => @sentences,
+          'syllables' => @syllables
+        }
+      end
 
       #now run all that through the formula
-      @score = @formula.score(data, @stats)
+      @score = @formula.score(@data, @stats)
     end
 
     def string_length(text)
