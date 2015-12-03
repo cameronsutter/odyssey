@@ -42,6 +42,33 @@ if all_stats is false, this returns a simple score. If it is true, it returns a 
       'average_syllables_per_word' => Float
     }
 
+You can also perform multiple analyses on the same text.  This is more efficient than calling each method separately as the initial text analysis (splitting up words, syllables, etc.) only needs to be performed once.
+
+    Odyssey.analyze_multi(text, formula_names, all_stats)
+
+Example:
+
+    Odyssey.analyze_multi("See Spot run.", ['FleschKincaidRe', 'FleschKincaidGl'], true)
+
+if all_stats is false, this returns a hash from formula name to score:
+
+    {
+        'FleschKincaidRe'  => 119.2,
+        'FleschKincaidGl'  => -2.6
+    }
+
+if all_stats is true, this returns a Hash, similar to the Hash above:
+
+    {
+      'scores'                     => Hash,
+      'string_length'              => Fixnum,
+      'letter_count'               => Fixnum,
+      'syllable_count'             => Fixnum,
+      'word_count'                 => Fixnum,
+      'sentence_count'             => Fixnum,
+      'average_words_per_sentence' => Float,
+      'average_syllables_per_word' => Float
+    }
 
 ##Extending Odyssey
 

@@ -215,6 +215,64 @@ describe Odyssey do
 
   end
 
+  context 'Run multiple formulas' do
+
+    describe 'get scores' do
+      before :all do
+        formula_names = [ 'Ari',
+                          'ColemanLiau',
+                          'FleschKincaidGl',
+                          'FleschKincaidRe',
+                          'GunningFog']
+
+        @simple = Odyssey.analyze_multi one_simple_sentence, formula_names
+        @simple_stats = Odyssey.analyze_multi one_simple_sentence, formula_names, true
+      end
+
+      it 'should return something' do
+        @simple.should_not be_nil
+      end
+
+      it 'should return the scores' do
+        @simple['Ari'].should             == -4.2
+        @simple['ColemanLiau'].should     == 3.7
+        @simple['FleschKincaidGl'].should == -2.6
+        @simple['FleschKincaidRe'].should == 119.2
+        @simple['GunningFog'].should      == 1.2
+      end
+
+      it 'should return correct stats' do
+        @simple_stats['string_length'].should  == 13
+        @simple_stats['letter_count'].should   == 10
+        @simple_stats['syllable_count'].should == 3
+        @simple_stats['word_count'].should     == 3
+        @simple_stats['sentence_count'].should == 1
+        @simple_stats['average_words_per_sentence'].should == 3
+        @simple_stats['average_syllables_per_word'].should == 1
+      end
+
+      it 'should include scores in the stats hash' do
+        @simple_stats['scores']['Ari'].should             == -4.2
+        @simple_stats['scores']['ColemanLiau'].should     == 3.7
+        @simple_stats['scores']['FleschKincaidGl'].should == -2.6
+        @simple_stats['scores']['FleschKincaidRe'].should == 119.2
+        @simple_stats['scores']['GunningFog'].should      == 1.2
+      end
+
+      it 'should not include score in the stats hash' do
+        @simple_stats['name'].should    be_nil
+        @simple_stats['formula'].should be_nil
+        @simple_stats['score'].should   be_nil
+      end
+
+    end
+
+    it 'should raise an error for empty formula list' do
+      expect { Odyssey.analyze_multi one_simple_sentence, []}.to raise_error(ArgumentError)
+    end
+
+  end
+
   describe 'plugin formulas' do
     it 'should run any formula using a shortcut method' do
       result = Odyssey.fake_formula one_simple_sentence, true

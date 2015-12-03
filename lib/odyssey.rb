@@ -21,6 +21,29 @@ module Odyssey
     output
   end
 
+  def self.analyze_multi(text, formula_names, all_stats = false)
+    raise ArgumentError, "You must supply at least one formula" if formula_names.empty?
+
+    scores = {}
+    @engine = Odyssey::Engine.new(formula_names[0])
+    scores[formula_names[0]] = @engine.score(text)
+
+    formula_names.drop(1).each do |formula_name|
+      @engine.update_formula(formula_name)
+      scores[formula_name] = @engine.score("", false)
+    end
+
+    if all_stats
+      all_stats = @engine.get_stats(false)
+      all_stats['scores'] = scores
+      output = all_stats
+    else
+      output = scores
+    end
+
+    output
+  end
+
   #run whatever method was given as if it were a shortcut to a formula
   def self.method_missing(method_name, *args, &block)
     #send to the main method
