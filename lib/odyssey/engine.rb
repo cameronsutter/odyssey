@@ -125,11 +125,8 @@ module Odyssey
       count
     end
 
-    def get_stats
-      { 
-        'name'           => @formula.name,
-        'formula'        => @formula,
-        'score'          => @score,
+    def get_stats(with_score = true)
+      all_stats = {
         'string_length'  => @stats['string_length'],
         'letter_count'   => @stats['letter_count'],
         'syllable_count' => @stats['syllable_count'],
@@ -138,6 +135,12 @@ module Odyssey
         'average_words_per_sentence' => @stats['average_words_per_sentence'],
         'average_syllables_per_word' => @stats['average_syllables_per_word']
       }
+      if with_score
+        all_stats['name']    = @formula.name
+        all_stats['formula'] = @formula
+        all_stats['score']   = @score
+      end
+      all_stats
     end
 
     def reset

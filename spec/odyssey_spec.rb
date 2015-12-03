@@ -226,7 +226,7 @@ describe Odyssey do
                           'GunningFog']
 
         @simple = Odyssey.analyze_multi one_simple_sentence, formula_names
-        @double, @stats = Odyssey.analyze_multi two_simple_sentences, formula_names, true
+        @simple_stats = Odyssey.analyze_multi one_simple_sentence, formula_names, true
       end
 
       it 'should return something' do
@@ -241,11 +241,30 @@ describe Odyssey do
         @simple['GunningFog'].should      == 1.2
       end
 
-      it 'should return some stats' do
-        @stats['score'].should == 1.2
-        @stats['name'].should == 'Gunning-Fog Score'
-        @stats['word_count'].should == 6
+      it 'should return correct stats' do
+        @simple_stats['string_length'].should  == 13
+        @simple_stats['letter_count'].should   == 10
+        @simple_stats['syllable_count'].should == 3
+        @simple_stats['word_count'].should     == 3
+        @simple_stats['sentence_count'].should == 1
+        @simple_stats['average_words_per_sentence'].should == 3
+        @simple_stats['average_syllables_per_word'].should == 1
       end
+
+      it 'should include scores in the stats hash' do
+        @simple_stats['scores']['Ari'].should             == -4.2
+        @simple_stats['scores']['ColemanLiau'].should     == 3.7
+        @simple_stats['scores']['FleschKincaidGl'].should == -2.6
+        @simple_stats['scores']['FleschKincaidRe'].should == 119.2
+        @simple_stats['scores']['GunningFog'].should      == 1.2
+      end
+
+      it 'should not include score in the stats hash' do
+        @simple_stats['name'].should    be_nil
+        @simple_stats['formula'].should be_nil
+        @simple_stats['score'].should   be_nil
+      end
+
     end
 
     it 'should raise an error for empty formula list' do

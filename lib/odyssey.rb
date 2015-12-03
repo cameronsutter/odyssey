@@ -34,7 +34,9 @@ module Odyssey
     end
 
     if all_stats
-      output = scores, @engine.get_stats
+      all_stats = @engine.get_stats(false)
+      all_stats['scores'] = scores
+      output = all_stats
     else
       output = scores
     end

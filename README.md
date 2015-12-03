@@ -50,15 +50,25 @@ Example:
 
     Odyssey.analyze_multi("See Spot run.", ['FleschKincaidRe', 'FleschKincaidGl'], true)
 
-if all_stats is false, this returns a hash from formula name to score, in this case:
+if all_stats is false, this returns a hash from formula name to score:
 
     {
         'FleschKincaidRe'  => 119.2,
         'FleschKincaidGl'  => -2.6
     }
 
-if all_stats is true, this returns a pair, [scores, stats], where stats has the same form as the Hash above.  The name, class and score on the stats Hash will probably be ignored but is set by the last element in formula_names. analyze_multi will raise an error if you provide an empty list of formula_names.
+if all_stats is true, this returns a Hash, similar to the Hash above:
 
+    {
+      'scores'                     => Hash,
+      'string_length'              => Fixnum,
+      'letter_count'               => Fixnum,
+      'syllable_count'             => Fixnum,
+      'word_count'                 => Fixnum,
+      'sentence_count'             => Fixnum,
+      'average_words_per_sentence' => Float,
+      'average_syllables_per_word' => Float
+    }
 
 ##Extending Odyssey
 
