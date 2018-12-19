@@ -60,7 +60,7 @@ module Odyssey
           'syllables' => @syllables
         }
         @data['words_per_sentence'] = words_by_sentence()
-        @data['syllables_per_sentence'] = syllables_by_sentence()
+        @data['syllables_per_sentence'] = syllables_by_sentence(@sentences)
 
         @stats_by_sentence = {
           'string_length' => @sentences.map { |a| string_length(a) },
@@ -134,8 +134,7 @@ module Odyssey
     def average_syllables_per_word_per_sentence(text)
       res = []
       for i in 0..@stats_by_sentence['string_length'].length-1
-        res.push(@stats_by_sentence['syllable_count'][i].to_f /
-                 @stats_by_sentence['word_count'][i].to_f)
+        res.push(@stats_by_sentence['syllable_count'][i].to_f / @stats_by_sentence['word_count'][i].to_f)
       end
       res
     end
