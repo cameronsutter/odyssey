@@ -4,11 +4,11 @@ class FleschKincaidRe < Formula
     calc_score(stats['average_words_per_sentence'], stats['average_syllables_per_word'])
   end
 
-  def score_by_sentence(text_split, stats_split)
-    res = Array.new(text_split['sentences'].length)
-    for i in 0..text_split['sentences'].length-1
-      res[i] = (calc_score(stats_split['word_count'][i],
-                           stats_split['average_syllables_per_word'][i]))
+  def score_by_sentence(text, stats_split)
+    res = []
+    for i in 0..text['sentences'].length-1
+      res.push(calc_score(stats_split['word_count'][i],
+                          stats_split['average_syllables_per_word'][i]))
     end
     res
   end
