@@ -4,6 +4,7 @@ module Odyssey
     #instance variables
     @formula
     @score
+    @score_by_sentence
     @stats
     @words
     @sentences
@@ -57,10 +58,20 @@ module Odyssey
           'sentences' => @sentences,
           'syllables' => @syllables
         }
+
+        @stats_by_sentence = {
+          'string_length' => @sentences.map { |a| string_length(a) },
+          'letter_count' => @sentences.map { |a| letter_count(a) },
+          'word_count' => @sentences.map { |a| word_count(a) },
+          'syllable_count' => @sentences.map { |a| syllable_count(a) },
+          'sentence_count' => Array.new(@sentences.length, 1),
+        }
+        @stats_by_sentence['average_syllables_per_word'] = average_syllables_per_word_per_sentence(text)
       end
 
       #now run all that through the formula
       @score = @formula.score(@data, @stats)
+      @score_by_sentence = @formula.score_by_sentence(@data, @stats_by_sentence)
     end
 
     def string_length(text)
@@ -98,6 +109,15 @@ module Odyssey
 
     def average_syllables_per_word(text)
       @stats['syllable_count'].to_f / @stats['word_count'].to_f
+    end
+
+    def average_syllables_per_word_per_sentence(text)
+      res = []
+      for i in 0..@stats_by_sentence['string_length'].length-1
+        res.push(@stats_by_sentence['syllable_count'][i].to_f /
+                 @stats_by_sentence['word_count'][i].to_f)
+      end
+      res
     end
 
     # for now this just removes html tags
@@ -139,13 +159,27 @@ module Odyssey
         all_stats['name']    = @formula.name
         all_stats['formula'] = @formula
         all_stats['score']   = @score
+        all_stats['score_by_sentence'] = merge_scores_with_sentences()
       end
       all_stats
+    end
+
+    def merge_scores_with_sentences()
+      res = []
+      ro = Struct.new(:score, :sentence)
+      for i in 0..@score_by_sentence.length-1
+        r = ro.new
+        r.sentence = @sentences[i]
+        r.score = @score_by_sentence[i]
+        res.push(r)
+      end
+      res
     end
 
     def reset
       @formula = nil
       @score = 0
+      @score_by_sentence = []
       @stats = {}
       @words = nil
       @sentences = nil
