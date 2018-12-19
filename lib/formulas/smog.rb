@@ -5,6 +5,15 @@ class Smog < Formula
     calc_score(stats['sentence_count'], with_three)
   end
 
+  def score_per_sentence(text, stats_split)
+    res = []
+    for i in 0..text['sentences'].length-1
+      with_three = three_syllables(text['syllables_per_sentence'][i])
+      res.push(calc_score(1, with_three))
+    end
+    res
+  end
+
   def three_syllables(syllables)
     with_three = 0
     syllables.each do |s|
