@@ -73,8 +73,8 @@ module Odyssey
       end
 
       #now run all that through the formula
-      @score = @formula.score(@data, @stats)
       @score_by_sentence = @formula.score_by_sentence(@data, @stats_by_sentence)
+      @score = @formula.score(@data, @stats)
     end
 
     def string_length(text)
