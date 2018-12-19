@@ -23,6 +23,10 @@ class Formula
     0
   end
 
+  def score_by_sentence(text_split, stats_split)
+    0
+  end
+
   def name
     'Generic'
   end
