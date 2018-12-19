@@ -4,6 +4,10 @@ class FakeFormula < Formula
     text
   end
 
+  def score_by_sentence(text, stats_split)
+    text["sentences"]
+  end
+
   def name
     "It's fake"
   end
