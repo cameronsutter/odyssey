@@ -7,7 +7,7 @@ class Formula
   #   'sentences' => Array,
   #   'syllables' => Array
   # }
-  # 
+  #
   # stats will be a Hash like so:
   # {
   #   'string_length' => Fixnum,
