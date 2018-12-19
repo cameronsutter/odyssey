@@ -9,6 +9,7 @@ module Odyssey
     @words
     @sentences
     @syllables
+    @syllables_by_sentence
     @data
 
     #regex
@@ -58,6 +59,8 @@ module Odyssey
           'sentences' => @sentences,
           'syllables' => @syllables
         }
+        @data['words_per_sentence'] = words_by_sentence()
+        @data['syllables_per_sentence'] = syllables_by_sentence()
 
         @stats_by_sentence = {
           'string_length' => @sentences.map { |a| string_length(a) },
@@ -93,9 +96,26 @@ module Odyssey
       count
     end
 
+    def syllables_by_sentence(words)
+      res = []
+      words.each do |w|
+        num = analyze_syllables(w)
+        res << num
+      end
+      res
+    end
+
     def word_count(text)
       @words = text.scan WORD_REGEX
       @words.size
+    end
+
+    def words_by_sentence()
+      res = []
+      for i in 0..@sentences.length-1
+        res.push(@sentences[i].scan WORD_REGEX)
+      end
+      res
     end
 
     def sentence_count(text)
