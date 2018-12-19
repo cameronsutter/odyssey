@@ -4,9 +4,9 @@ class Ari < Formula
     calc_score(stats['letter_count'], stats['word_count'], stats['sentence_count'])
   end
 
-  def score_by_sentence(text_split, stats_split)
+  def score_by_sentence(text, stats_split)
     res = []
-    for i in 0..text_split['sentences'].length-1
+    for i in 0..text['sentences'].length-1
       res.push(calc_score(stats_split['letter_count'][i],
                           stats_split['word_count'][i],
                           1))
