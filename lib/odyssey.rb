@@ -7,10 +7,10 @@ module Odyssey
   #main method
   def self.analyze(text, formula_name = DEFAULT_FORMULA, all_stats = false)
     formula_name ||= DEFAULT_FORMULA
-    
+
     @engine = Odyssey::Engine.new(formula_name)
     score = @engine.score(text)
-    
+
     #return all stats?
     if all_stats
       output = @engine.get_stats
