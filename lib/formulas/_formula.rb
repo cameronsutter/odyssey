@@ -7,7 +7,7 @@ class Formula
   #   'sentences' => Array,
   #   'syllables' => Array
   # }
-  # 
+  #
   # stats will be a Hash like so:
   # {
   #   'string_length' => Fixnum,
@@ -20,6 +20,10 @@ class Formula
   # }
 
   def score(text, stats)
+    0
+  end
+
+  def score_by_sentence(text, stats_split)
     0
   end
 
