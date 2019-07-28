@@ -70,7 +70,7 @@ if all_stats is true, this returns a Hash, similar to the Hash above:
       'average_syllables_per_word' => Float
     }
 
-##Extending Odyssey
+## Extending Odyssey
 
 To extend Odyssey, you can create a class that inherits from Formula.
 
@@ -107,11 +107,11 @@ stats will be a Hash like so:
     }
 
 That is all you need.
-To call your formula you just use 
+To call your formula you just use
 
     Odyssey.cool_new_formula('See Spot run.', true)
 
-Because you have access to the formula's class (when the 'all_stats' flag is true),
+Because you have access to the formula's class (when the `all_stats` flag is true),
 you have access to any other methods or class variables.
 
 ## Contributing
