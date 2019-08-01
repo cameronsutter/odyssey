@@ -28,7 +28,7 @@ Example:
 
     Odyssey.flesch_kincaid_re("See Spot run.", true)
 
-if all_stats is false, this returns a simple score. If it is true, it returns a Hash:
+if `all_stats` is false, this returns a simple score. If it is true, it returns a Hash:
 
 
     {
