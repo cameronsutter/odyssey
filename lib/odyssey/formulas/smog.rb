@@ -1,4 +1,4 @@
-class Smog < Formula
+class Smog < Odyssey::Formula
 
   def score(text, stats)
     with_three = three_syllables(text['syllables'])

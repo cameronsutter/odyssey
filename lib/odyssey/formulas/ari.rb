@@ -1,4 +1,4 @@
-class ColemanLiau < Formula
+class Ari < Odyssey::Formula
 
   def score(text, stats)
     calc_score(stats['letter_count'], stats['word_count'], stats['sentence_count'])
@@ -11,13 +11,14 @@ class ColemanLiau < Formula
                           stats_split['word_count'][i],
                           1))
     end
+    res
   end
 
   def calc_score(letter_count, word_count, sentence_count)
-    ((5.89 * (letter_count.to_f / word_count.to_f)) - (0.3 * (sentence_count.to_f / word_count.to_f)) - 15.8).round(1)
+    (((4.71 * (letter_count.to_f / word_count.to_f)) + (0.5 * (word_count.to_f / sentence_count.to_f))) - 21.43).round(1)
   end
 
   def name
-    'Coleman-Liau Index'
+    'Automated Readability Index'
   end
 end

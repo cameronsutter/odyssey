@@ -59,12 +59,12 @@ module Odyssey
 end
 
 require 'odyssey/engine'
-require 'formulas/_formula'
+require 'odyssey/formulas/formula'
 
-require 'formulas/ari'
-require 'formulas/coleman_liau'
-require 'formulas/fake_formula'
-require 'formulas/flesch_kincaid_gl'
-require 'formulas/flesch_kincaid_re'
-require 'formulas/gunning_fog'
-require 'formulas/smog'
+require 'odyssey/formulas/ari'
+require 'odyssey/formulas/coleman_liau'
+require 'odyssey/formulas/fake_formula'
+require 'odyssey/formulas/flesch_kincaid_gl'
+require 'odyssey/formulas/flesch_kincaid_re'
+require 'odyssey/formulas/gunning_fog'
+require 'odyssey/formulas/smog'

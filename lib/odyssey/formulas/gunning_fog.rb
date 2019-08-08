@@ -1,4 +1,4 @@
-class GunningFog < Formula
+class GunningFog < Odyssey::Formula
 
   def score(text, stats)
     percent = three_syllables(stats['word_count'], text['syllables'])

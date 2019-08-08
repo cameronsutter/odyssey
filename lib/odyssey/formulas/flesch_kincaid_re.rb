@@ -1,4 +1,4 @@
-class FleschKincaidRe < Formula
+class FleschKincaidRe < Odyssey::Formula
 
   def score(text, stats)
     calc_score(stats['average_words_per_sentence'], stats['average_syllables_per_word'])
