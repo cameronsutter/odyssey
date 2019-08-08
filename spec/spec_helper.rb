@@ -4,6 +4,7 @@ require 'odyssey'
 RSpec.configure do |config|
   config.color = true
   config.formatter     = 'documentation'
+  config.expect_with(:rspec) { |c| c.syntax = %i[should expect] }
 end
 
 def one_simple_sentence
