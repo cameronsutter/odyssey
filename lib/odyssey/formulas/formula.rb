@@ -1,5 +1,4 @@
-class Formula
-
+class Odyssey::Formula
   # text will be a Hash like so:
   # data = {
   #   'raw' => String,

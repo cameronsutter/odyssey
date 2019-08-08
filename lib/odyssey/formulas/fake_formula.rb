@@ -1,4 +1,4 @@
-class FakeFormula < Formula
+class FakeFormula < Odyssey::Formula
 
   def score(text, stats)
     text

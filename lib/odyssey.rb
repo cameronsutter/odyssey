@@ -58,6 +58,13 @@ module Odyssey
   end
 end
 
-require 'require_all'
 require 'odyssey/engine'
-require_rel 'formulas'
+require 'odyssey/formulas/formula'
+
+require 'odyssey/formulas/ari'
+require 'odyssey/formulas/coleman_liau'
+require 'odyssey/formulas/fake_formula'
+require 'odyssey/formulas/flesch_kincaid_gl'
+require 'odyssey/formulas/flesch_kincaid_re'
+require 'odyssey/formulas/gunning_fog'
+require 'odyssey/formulas/smog'

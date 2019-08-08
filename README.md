@@ -74,12 +74,11 @@ if all_stats is true, this returns a Hash, similar to the Hash above:
 
 ## Extending Odyssey
 
-To extend Odyssey, you can create a class that inherits from Formula.
+To extend Odyssey, you can create a class that inherits from `Odyssey::Formula`.
 
-    class CoolNewFormula < Formula
+    class CoolNewFormula < Odyssey::Formula
 
       def score(text, stats)
-
       end
 
       def name
