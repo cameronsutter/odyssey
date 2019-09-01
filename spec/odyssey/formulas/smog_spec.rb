@@ -16,11 +16,11 @@ context 'SMOG Index' do
     end
 
     it 'should return the score' do
-      # @simple.should == 1.8
-      # @double.should == 1.8
-      # @complex.should == 1.8
-      # @complex_double.should == 1.8
-      # @very_complex.should == 10.1
+      @simple.should == 3.1
+      @double.should == 3.1
+      @complex.should == 3.1
+      @complex_double.should == 3.1
+      @very_complex.should == 13.8
     end
   end
 
