@@ -1,0 +1,9 @@
+language: ruby
+
+dist: bionic
+
+script: |
+  bundle exec rake spec
+
+notifications:
+  email: false
