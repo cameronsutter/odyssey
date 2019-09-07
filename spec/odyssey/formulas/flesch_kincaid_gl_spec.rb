@@ -1,25 +1,15 @@
 require 'spec_helper'
 
 context 'Flesch-Kincaid Grade Level' do
-
-  describe 'get score' do
-    before :all do
-      @simple = Odyssey.flesch_kincaid_gl one_simple_sentence
-      @double = Odyssey.flesch_kincaid_gl two_simple_sentences
-      @complex = Odyssey.flesch_kincaid_gl one_complex_sentence
-      @complex_double = Odyssey.flesch_kincaid_gl two_complex_sentences
+  describe '.flesch_kincaid_gl' do
+    subject do
+      Odyssey.flesch_kincaid_gl books(:on_the_duty_of_civil_disobedience)
     end
 
-    it 'should return something' do
-      @simple.should_not be_nil
-    end
+    it { is_expected.to_not eq nil }
 
     it 'should return the score' do
-      @simple.should == -2.6
-      @double.should == -2.6
-      @complex.should == 2.3
-      @complex_double.should == 3
+      expect(subject).to eq 12.3
     end
   end
-
 end

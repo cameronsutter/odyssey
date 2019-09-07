@@ -1,136 +1,148 @@
 require 'spec_helper'
 
 describe Odyssey do
+  describe '.analyze' do
+    context 'with no args' do
+      subject { Odyssey.analyze books(:on_the_duty_of_civil_disobedience) }
 
-  context 'default formula' do
-    it 'should return something' do
-      result = Odyssey.analyze one_simple_sentence
-      result.should_not be_nil
+      it 'outputs the FleschKincaid Reading Ease score' do
+        expect(subject).to eq 58.2
+      end
     end
 
-    describe 'get all stats' do
-      before :all do
-        @simple = Odyssey.analyze one_simple_sentence, nil, true
-        @double = Odyssey.analyze two_simple_sentences, nil, true
+    context 'with no formulas provided, and `all_stats = true`' do
+      subject do
+        Odyssey.analyze books(:on_the_duty_of_civil_disobedience), nil, true
       end
 
-      it 'should return formula name' do
-        @simple['name'].should == 'Flesch-Kincaid Reading Ease'
+      describe "['name']" do
+        it 'returns formula name' do
+          expect(subject['name']).to eq 'Flesch-Kincaid Reading Ease'
+        end
       end
 
-      it 'should return score' do
-        @simple['score'].should == 119.2
+      describe "['score']" do
+        it 'returns the score' do
+          expect(subject['score']).to eq 58.2
+        end
       end
 
-      it 'should return the formula' do
-        @simple['formula'].class.to_s.should == 'FleschKincaidRe'
+      describe "['formula']" do
+        it 'returns the formula class' do
+          expect(subject['formula'].class.to_s).to eq 'FleschKincaidRe'
+        end
       end
 
-      it 'should return string length' do
-        @simple['string_length'].should == 13
+      describe "['string_length']" do
+        it 'returns the number of characters (including whitespace)' do
+          expect(subject['string_length']).to eq 51_258
+        end
       end
 
-      it 'should return letter count' do
-        @simple['letter_count'].should == 10
+      describe "['letter_count']" do
+        it 'returns the number of letters' do
+          expect(subject['letter_count']).to eq 40_320
+        end
       end
 
-      it 'should return syllable count' do
-        @simple['syllable_count'].should == 3
+      describe "['syllable_count']" do
+        it 'returns the number of syllables' do
+          expect(subject['syllable_count']).to eq 13_259
+        end
       end
 
-      it 'should return word count' do
-        @simple['word_count'].should == 3
-
-        @double['word_count'].should == 6
+      describe "['word_count']" do
+        it 'returns the number of words' do
+          expect(subject['word_count']).to eq 9_406
+        end
       end
 
-      it 'should return sentence count' do
-        @simple['sentence_count'].should == 1
-
-        @double['sentence_count'].should == 2
+      describe "['sentence_count']" do
+        it 'returns the number of sentences' do
+          expect(subject['sentence_count']).to eq 325
+        end
       end
 
-      it 'should return average words per sentence' do
-        @simple['average_words_per_sentence'].should == 3
-
-        @double['average_words_per_sentence'].should == 3
+      describe "['average_words_per_sentence']" do
+        it 'returns the average words per sentences' do
+          expect(subject['average_words_per_sentence']).to eq 28.94153846153846
+        end
       end
 
-      it 'should return average syllables per word' do
-        @simple['average_syllables_per_word'].should == 1
-
-        @double['average_syllables_per_word'].should == 1
+      describe "['average_syllables_per_word']" do
+        it 'returns the average syllables per word' do
+          expect(subject['average_syllables_per_word']).to eq 1.4096321496916862
+        end
       end
-
-    end
-  end
-
-  context 'Run multiple formulas' do
-
-    describe 'get scores' do
-      before :all do
-        formula_names = [ 'Ari',
-                          'ColemanLiau',
-                          'FleschKincaidGl',
-                          'FleschKincaidRe',
-                          'GunningFog']
-
-        @simple = Odyssey.analyze_multi one_simple_sentence, formula_names
-        @simple_stats = Odyssey.analyze_multi one_simple_sentence, formula_names, true
-      end
-
-      it 'should return something' do
-        @simple.should_not be_nil
-      end
-
-      it 'should return the scores' do
-        @simple['Ari'].should             == -4.2
-        @simple['ColemanLiau'].should     == 3.7
-        @simple['FleschKincaidGl'].should == -2.6
-        @simple['FleschKincaidRe'].should == 119.2
-        @simple['GunningFog'].should      == 1.2
-      end
-
-      it 'should return correct stats' do
-        @simple_stats['string_length'].should  == 13
-        @simple_stats['letter_count'].should   == 10
-        @simple_stats['syllable_count'].should == 3
-        @simple_stats['word_count'].should     == 3
-        @simple_stats['sentence_count'].should == 1
-        @simple_stats['average_words_per_sentence'].should == 3
-        @simple_stats['average_syllables_per_word'].should == 1
-      end
-
-      it 'should include scores in the stats hash' do
-        @simple_stats['scores']['Ari'].should             == -4.2
-        @simple_stats['scores']['ColemanLiau'].should     == 3.7
-        @simple_stats['scores']['FleschKincaidGl'].should == -2.6
-        @simple_stats['scores']['FleschKincaidRe'].should == 119.2
-        @simple_stats['scores']['GunningFog'].should      == 1.2
-      end
-
-      it 'should not include score in the stats hash' do
-        @simple_stats['name'].should    be_nil
-        @simple_stats['formula'].should be_nil
-        @simple_stats['score'].should   be_nil
-      end
-
     end
 
-    it 'should raise an error for empty formula list' do
-      expect { Odyssey.analyze_multi one_simple_sentence, []}.to raise_error(ArgumentError)
-    end
+    context 'with multiple formulas provided, and `all_stats = true`' do
+      subject do
+        Odyssey.analyze_multi \
+          books(:on_the_duty_of_civil_disobedience),
+          %w[
+            Ari
+            ColemanLiau
+            FleschKincaidGl
+            FleschKincaidRe
+            GunningFog
+            Smog
+          ],
+          true
+      end
 
-  end
+      describe "['FormulaClass']" do
+        it 'returns the score' do
+          expect(subject['scores']['Ari']).to eq 13.2
+          expect(subject['scores']['ColemanLiau']).to eq 9.4
+          expect(subject['scores']['FleschKincaidGl']).to eq 12.3
+          expect(subject['scores']['FleschKincaidRe']).to eq 58.2
+          expect(subject['scores']['GunningFog']).to eq 11.6
+          expect(subject['scores']['Smog']).to eq 17.1
+        end
+      end
 
-  describe 'plugin formulas' do
-    it 'should run any formula using a shortcut method' do
-      result = Odyssey.fake_formula one_simple_sentence, true
-      result['name'].should == "It's fake"
-    end
+      describe "['string_length']" do
+        it 'returns the number of characters (including whitespace)' do
+          expect(subject['string_length']).to eq 51_258
+        end
+      end
 
-    it 'should raise an error for a formula that does not exist' do
-      expect { Odyssey.no_existe one_simple_sentence, true }.to raise_error(NoMethodError)
+      describe "['letter_count']" do
+        it 'returns the number of letters' do
+          expect(subject['letter_count']).to eq 40_320
+        end
+      end
+
+      describe "['syllable_count']" do
+        it 'returns the number of syllables' do
+          expect(subject['syllable_count']).to eq 13_259
+        end
+      end
+
+      describe "['word_count']" do
+        it 'returns the number of words' do
+          expect(subject['word_count']).to eq 9_406
+        end
+      end
+
+      describe "['sentence_count']" do
+        it 'returns the number of sentences' do
+          expect(subject['sentence_count']).to eq 325
+        end
+      end
+
+      describe "['average_words_per_sentence']" do
+        it 'returns the average words per sentences' do
+          expect(subject['average_words_per_sentence']).to eq 28.94153846153846
+        end
+      end
+
+      describe "['average_syllables_per_word']" do
+        it 'returns the average syllables per word' do
+          expect(subject['average_syllables_per_word']).to eq 1.4096321496916862
+        end
+      end
     end
   end
 end
