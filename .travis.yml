@@ -1,6 +1,14 @@
 language: ruby
 
-dist: bionic
+dist: bionic # Ubuntu 18.04
+
+# Test against all Ruby-supported versions
+#
+# See https://www.ruby-lang.org/en/downloads/branches/
+rvm:
+  - 2.4
+  - 2.5
+  - 2.6
 
 script: |
   bundle exec rake spec
