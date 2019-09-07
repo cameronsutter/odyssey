@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **No breaking changes from 0.3.0**
 
-### Added
+### Changed
 
 - Updated specs to use larger examples by [@jethrodaniel](https://github.com/jethrodaniel)
 
@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Added before implementing this change log.
 
-## [0.2.0]
+## [0.2.0] - 2016-04-05
+
+Added before implementing this change log.
+
+## [0.1.8] - 2013-06-13
 
 Added before implementing this change log.
