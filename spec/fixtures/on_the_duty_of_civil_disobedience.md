@@ -1,4 +1,4 @@
-On the Duty of Civil Disobedience
+"On the Duty of Civil Disobedience" by Henry David Thoreau (1849)
 
 I heartily accept the motto,—“That government is best which governs
 least;” and I should like to see it acted up to more rapidly and
