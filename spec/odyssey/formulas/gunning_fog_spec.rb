@@ -1,25 +1,17 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
-context 'Gunning-Fog Score' do
+fixture_texts.each do |text|
+  context 'Gunning-Fog Score' do
+    describe '.gunning_fog' do
+      subject { Odyssey.gunning_fog text[:text] }
 
-  describe 'get score' do
-    before :all do
-      @simple = Odyssey.gunning_fog one_simple_sentence
-      @double = Odyssey.gunning_fog two_simple_sentences
-      @complex = Odyssey.gunning_fog one_complex_sentence
-      @complex_double = Odyssey.gunning_fog two_complex_sentences
-    end
+      it { is_expected.to_not eq nil }
 
-    it 'should return something' do
-      @simple.should_not be_nil
-    end
-
-    it 'should return the score' do
-      @simple.should == 1.2
-      @double.should == 1.2
-      @complex.should == 3.6
-      @complex_double.should == 3.4
+      it 'should return the score' do
+        expect(subject).to eq text[:scores][:gunning_fog]
+      end
     end
   end
-
 end

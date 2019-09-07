@@ -1,0 +1,37 @@
+---
+
+text: |
+  Some say the world will end in fire,
+  Some say in ice.
+  From what I’ve tasted of desire
+  I hold with those who favor fire.
+  But if it had to perish twice,
+  I think I know enough of hate
+  To say that for destruction ice
+  Is also great
+  And would suffice.
+
+title: Fire and Ice
+author: Robert Frost
+publication_date:
+  year: 1923
+source: https://web.archive.org/web/20190211010001/https://www.gutenberg.org/files/58611/58611-0.txt
+
+data:
+  letter_count: 189
+  word_count: 52
+  three_plus_syllables: 2
+  syllable_count: 60
+  sentence_count:  3
+  string_length: 245
+  average_syllables_per_word: 1.1538461538461537
+  average_words_per_sentence: 17.333333333333332
+  note: |
+
+scores:
+  flesch_kincaid_reading_ease: 91.6
+  flesch_kincaid_grade_level: 4.8
+  gunning_fog: 6.9
+  coleman_liau: 5.6
+  smog: 9.7
+  ari: 4.4

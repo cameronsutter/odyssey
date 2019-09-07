@@ -1,25 +1,17 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
-context 'Flesch-Kincaid Reading Ease' do
+fixture_texts.each do |text|
+  context 'Flesch-Kincaid Reading Ease' do
+    describe '.flesch_kincaid_re' do
+      subject { Odyssey.flesch_kincaid_re text[:text] }
 
-  describe 'get score' do
-    before :all do
-      @simple = Odyssey.flesch_kincaid_re one_simple_sentence
-      @double = Odyssey.flesch_kincaid_re two_simple_sentences
-      @complex = Odyssey.flesch_kincaid_re one_complex_sentence
-      @complex_double = Odyssey.flesch_kincaid_re two_complex_sentences
-    end
+      it { is_expected.to_not eq nil }
 
-    it 'should return something' do
-      @simple.should_not be_nil
-    end
-
-    it 'should return the score' do
-      @simple.should == 119.2
-      @double.should == 119.2
-      @complex.should == 94.3
-      @complex_double.should == 88.7
+      it 'should return the score' do
+        expect(subject).to eq text[:scores][:flesch_kincaid_reading_ease]
+      end
     end
   end
-
 end
