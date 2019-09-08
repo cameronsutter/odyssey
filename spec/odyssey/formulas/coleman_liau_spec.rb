@@ -1,14 +1,17 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
-context 'Coleman-Liau Index' do
-  describe '.coleman_liau ' do
-    subject { Odyssey.coleman_liau books(:on_the_duty_of_civil_disobedience) }
+fixture_texts.each do |text|
+  context 'Coleman-Liau Index' do
+    describe '.coleman_liau ' do
+      subject { Odyssey.coleman_liau text[:text] }
 
-    it { is_expected.to_not eq nil }
+      it { is_expected.to_not eq nil }
 
-    it 'should return the score' do
-      expect(subject).to eq 9.4
+      it 'should return the score' do
+        expect(subject).to eq text[:scores][:coleman_liau]
+      end
     end
   end
 end
-
