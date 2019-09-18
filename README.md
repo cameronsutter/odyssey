@@ -1,6 +1,7 @@
 # Odyssey
 
 [![Gem Version](https://badge.fury.io/rb/odyssey.svg)](https://badge.fury.io/rb/odyssey)
+[![Build Status](https://travis-ci.org/cameronsutter/odyssey.svg?branch=master)](https://travis-ci.org/cameronsutter/odyssey)
 
 Odyssey is an extendible text analyzing gem that outputs the readability score of text. It has several of the common readability formulas available, but defaults to the Flesch-Kincaid Reading Ease score.
 
