@@ -123,6 +123,19 @@ describe Odyssey do
 
   end
 
+  context 'Run all formulas' do
+    describe 'get scores' do
+      it 'should call analyze_multi' do
+        expect(Odyssey).to receive(:analyze_multi).with(one_simple_sentence, Array, true)
+        Odyssey.analyze_all one_simple_sentence
+      end
+
+      it 'should return a Hash' do
+        expect(Odyssey.analyze_all one_simple_sentence).to be_a Hash
+      end
+    end
+  end
+
   describe 'plugin formulas' do
     it 'should run any formula using a shortcut method' do
       result = Odyssey.fake_formula one_simple_sentence, true

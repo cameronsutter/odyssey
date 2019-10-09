@@ -44,6 +44,11 @@ module Odyssey
     output
   end
 
+  def self.analyze_all(text)
+    formulas = %w[Ari ColemanLiau FleschKincaidGl FleschKincaidRe GunningFog Smog]
+    analyze_multi text, formulas, true
+  end
+
   #run whatever method was given as if it were a shortcut to a formula
   def self.method_missing(method_name, *args, &block)
     #send to the main method
@@ -59,6 +64,7 @@ module Odyssey
 end
 
 require 'odyssey/engine'
+require 'odyssey/refinements'
 require 'odyssey/formulas/formula'
 
 require 'odyssey/formulas/ari'
