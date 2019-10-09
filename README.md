@@ -73,6 +73,15 @@ if all_stats is true, this returns a Hash, similar to the Hash above:
       'average_syllables_per_word' => Float
     }
 
+In order to get all stats and scores, you can use this shortcut:
+
+    Odyssey.analyze_all(text)
+
+or, using `Odyssey::Refinements`:
+
+    using Odyssey::Refinements
+    text.readability
+
 ## Extending Odyssey
 
 To extend Odyssey, you can create a class that inherits from `Odyssey::Formula`.
