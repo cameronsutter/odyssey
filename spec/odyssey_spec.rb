@@ -114,17 +114,35 @@ describe Odyssey do
         @simple_stats['formula'].should be_nil
         @simple_stats['score'].should   be_nil
       end
-
     end
 
     it 'should raise an error for empty formula list' do
-      expect { Odyssey.analyze_multi one_simple_sentence, []}.to raise_error(ArgumentError)
+      expect { Odyssey.analyze_multi one_simple_sentence, [] }.to raise_error(ArgumentError)
     end
-
   end
 
   context 'Run all formulas' do
     describe 'get scores' do
+      let :analyze_all do
+        {
+         'string_length' => 13,
+         'letter_count' => 10,
+         'syllable_count' => 3,
+         'word_count' => 3,
+         'sentence_count' => 1,
+         'average_words_per_sentence' => 3.0,
+         'average_syllables_per_word' => 1.0,
+         'scores' => {
+           'Ari' => -4.2,
+           'ColemanLiau' => 3.7,
+           'FleschKincaidGl' => -2.6,
+           'FleschKincaidRe' => 119.2,
+           'GunningFog' => 1.2,
+           'Smog' => 3.1
+          }
+        }
+      end
+
       it 'should call analyze_multi' do
         expect(Odyssey).to receive(:analyze_multi).with(one_simple_sentence, Array, true)
         Odyssey.analyze_all one_simple_sentence
@@ -132,6 +150,10 @@ describe Odyssey do
 
       it 'should return a Hash' do
         expect(Odyssey.analyze_all one_simple_sentence).to be_a Hash
+      end
+
+      it 'returns all scores and info' do
+        expect(Odyssey.analyze_all one_simple_sentence).to eq analyze_all
       end
     end
   end
