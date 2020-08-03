@@ -55,11 +55,6 @@ module Odyssey
     super unless Object.const_defined? formula_class
     analyze(args[0], formula_class, args[1] || false)
   end
-
-  #define this here, so it doesn't get sent to method_missing()
-  def self.to_ary
-    []
-  end
 end
 
 require 'odyssey/engine'
