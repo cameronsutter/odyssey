@@ -1,7 +1,7 @@
 require "odyssey/version"
 
 module Odyssey
-
+  FORMULAS = %w[Ari ColemanLiau FleschKincaidGl FleschKincaidRe GunningFog Smog]
   DEFAULT_FORMULA = 'FleschKincaidRe'
 
   #main method
@@ -45,8 +45,7 @@ module Odyssey
   end
 
   def self.analyze_all(text)
-    formulas = %w[Ari ColemanLiau FleschKincaidGl FleschKincaidRe GunningFog Smog]
-    analyze_multi text, formulas, true
+    analyze_multi text, FORMULAS, true
   end
 
   #run whatever method was given as if it were a shortcut to a formula
