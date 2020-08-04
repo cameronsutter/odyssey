@@ -1,5 +1,4 @@
 class Smog < Odyssey::Formula
-
   def score(text, stats)
     with_three = three_syllables(text['syllables'])
     calc_score(stats['sentence_count'], with_three)

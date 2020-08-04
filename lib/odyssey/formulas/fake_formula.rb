@@ -1,5 +1,4 @@
 class FakeFormula < Odyssey::Formula
-
   def score(text, stats)
     text
   end

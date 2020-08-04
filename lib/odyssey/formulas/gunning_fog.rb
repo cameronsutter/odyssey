@@ -1,5 +1,4 @@
 class GunningFog < Odyssey::Formula
-
   def score(text, stats)
     percent = three_syllables(stats['word_count'], text['syllables'])
     calc_score(stats['average_words_per_sentence'], percent)
