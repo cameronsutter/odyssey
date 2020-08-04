@@ -1,7 +1,7 @@
-require "odyssey/version"
+require "odyssey/error"
 
 module Odyssey
-
+  FORMULAS = %w[Ari ColemanLiau FleschKincaidGl FleschKincaidRe GunningFog Smog]
   DEFAULT_FORMULA = 'FleschKincaidRe'
 
   #main method
@@ -11,18 +11,13 @@ module Odyssey
     @engine = Odyssey::Engine.new(formula_name)
     score = @engine.score(text)
 
-    #return all stats?
-    if all_stats
-      output = @engine.get_stats
-    else
-      output = score
-    end
+    return @engine.get_stats if all_stats
 
-    output
+    score
   end
 
   def self.analyze_multi(text, formula_names, all_stats = false)
-    raise ArgumentError, "You must supply at least one formula" if formula_names.empty?
+    raise Odyssey::ArgumentError, "You must supply at least one formula" if formula_names.empty?
 
     scores = {}
     @engine = Odyssey::Engine.new(formula_names[0])
@@ -33,20 +28,15 @@ module Odyssey
       scores[formula_name] = @engine.score("", false)
     end
 
-    if all_stats
-      all_stats = @engine.get_stats(false)
-      all_stats['scores'] = scores
-      output = all_stats
-    else
-      output = scores
-    end
+    return scores unless all_stats
 
-    output
+    all_stats = @engine.get_stats(false)
+    all_stats['scores'] = scores
+    all_stats
   end
 
   def self.analyze_all(text)
-    formulas = %w[Ari ColemanLiau FleschKincaidGl FleschKincaidRe GunningFog Smog]
-    analyze_multi text, formulas, true
+    analyze_multi text, FORMULAS, true
   end
 
   #run whatever method was given as if it were a shortcut to a formula
@@ -55,11 +45,6 @@ module Odyssey
     formula_class = method_name.to_s.split("_").map(&:capitalize).join
     super unless Object.const_defined? formula_class
     analyze(args[0], formula_class, args[1] || false)
-  end
-
-  #define this here, so it doesn't get sent to method_missing()
-  def self.to_ary
-    []
   end
 end
 

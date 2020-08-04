@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe Odyssey do
+  describe '.analyze_multi' do
+    it 'raises an error if no formulas are supplied' do
+      expect do
+        Odyssey.analyze_multi(one_simple_sentence, [])
+      end.to raise_error(Odyssey::ArgumentError)
+    end
+  end
 
   context 'default formula' do
     it 'should return something' do
@@ -117,7 +124,7 @@ describe Odyssey do
     end
 
     it 'should raise an error for empty formula list' do
-      expect { Odyssey.analyze_multi one_simple_sentence, [] }.to raise_error(ArgumentError)
+      expect { Odyssey.analyze_multi one_simple_sentence, [] }.to raise_error(Odyssey::ArgumentError)
     end
   end
 
