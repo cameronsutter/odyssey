@@ -1,5 +1,3 @@
-require "odyssey/version"
-
 module Odyssey
   FORMULAS = %w[Ari ColemanLiau FleschKincaidGl FleschKincaidRe GunningFog Smog]
   DEFAULT_FORMULA = 'FleschKincaidRe'
