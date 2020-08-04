@@ -11,14 +11,9 @@ module Odyssey
     @engine = Odyssey::Engine.new(formula_name)
     score = @engine.score(text)
 
-    #return all stats?
-    if all_stats
-      output = @engine.get_stats
-    else
-      output = score
-    end
+    return @engine.get_stats if all_stats
 
-    output
+    score
   end
 
   def self.analyze_multi(text, formula_names, all_stats = false)
@@ -33,15 +28,11 @@ module Odyssey
       scores[formula_name] = @engine.score("", false)
     end
 
-    if all_stats
-      all_stats = @engine.get_stats(false)
-      all_stats['scores'] = scores
-      output = all_stats
-    else
-      output = scores
-    end
+    return scores unless all_stats
 
-    output
+    all_stats = @engine.get_stats(false)
+    all_stats['scores'] = scores
+    all_stats
   end
 
   def self.analyze_all(text)
