@@ -13,11 +13,13 @@ class FleschKincaidRe < Odyssey::Formula
     res
   end
 
-  def calc_score(avg_words, avg_syllables)
-    ((206.835 - (1.015 * avg_words)) - (84.6 * avg_syllables)).round(1)
-  end
-
   def name
     'Flesch-Kincaid Reading Ease'
+  end
+
+  private
+
+  def calc_score(avg_words, avg_syllables)
+    ((206.835 - (1.015 * avg_words)) - (84.6 * avg_syllables)).round(1)
   end
 end

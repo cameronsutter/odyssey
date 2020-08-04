@@ -24,11 +24,13 @@ class GunningFog < Odyssey::Formula
     (with_three / word_count) * 100
   end
 
-  def calc_score(avg_words, percent_with_three)
-    ((avg_words + percent_with_three) * 0.4).round(1)
-  end
-
   def name
     'Gunning-Fog Score'
+  end
+
+  private
+
+  def calc_score(avg_words, percent_with_three)
+    ((avg_words + percent_with_three) * 0.4).round(1)
   end
 end

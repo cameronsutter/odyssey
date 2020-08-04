@@ -14,11 +14,13 @@ class Ari < Odyssey::Formula
     res
   end
 
-  def calc_score(letter_count, word_count, sentence_count)
-    (((4.71 * (letter_count.to_f / word_count.to_f)) + (0.5 * (word_count.to_f / sentence_count.to_f))) - 21.43).round(1)
-  end
-
   def name
     'Automated Readability Index'
+  end
+
+  private
+
+  def calc_score(letter_count, word_count, sentence_count)
+    (((4.71 * (letter_count.to_f / word_count.to_f)) + (0.5 * (word_count.to_f / sentence_count.to_f))) - 21.43).round(1)
   end
 end
