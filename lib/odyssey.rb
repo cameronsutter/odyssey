@@ -1,3 +1,5 @@
+require "odyssey/error"
+
 module Odyssey
   FORMULAS = %w[Ari ColemanLiau FleschKincaidGl FleschKincaidRe GunningFog Smog]
   DEFAULT_FORMULA = 'FleschKincaidRe'
@@ -20,7 +22,7 @@ module Odyssey
   end
 
   def self.analyze_multi(text, formula_names, all_stats = false)
-    raise ArgumentError, "You must supply at least one formula" if formula_names.empty?
+    raise Odyssey::ArgumentError, "You must supply at least one formula" if formula_names.empty?
 
     scores = {}
     @engine = Odyssey::Engine.new(formula_names[0])
