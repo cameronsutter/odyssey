@@ -29,10 +29,8 @@ module Odyssey
     end
 
     def update_formula(formula_name)
-      klass = Module.const_get formula_name
+      klass = Odyssey::Formulas.const_get formula_name
       @formula = klass.new
-    rescue
-      @formula = Formula.new
     end
 
     def score(_text, analyze = true)

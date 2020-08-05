@@ -1,8 +1,8 @@
 module Odyssey
   module Refinements
     refine String do
-      def readability
-        Odyssey.analyze_all self
+      def readability **args
+        Odyssey.analyze(self, **args)
       end
     end
   end
