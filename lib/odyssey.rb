@@ -1,61 +1,29 @@
 require "odyssey/error"
 
 module Odyssey
-  FORMULAS = %w[Ari ColemanLiau FleschKincaidGl FleschKincaidRe GunningFog Smog]
-  DEFAULT_FORMULA = 'FleschKincaidRe'
+  FORMULAS = %i[Ari ColemanLiau FleschKincaidGl FleschKincaidRe GunningFog Smog].freeze
+  DEFAULT_FORMULA = FORMULAS[3]
 
-  #main method
-  def self.analyze(text, formula_name = DEFAULT_FORMULA, all_stats = false)
-    formula_name ||= DEFAULT_FORMULA
+  # def self.analyze text, formula_name = DEFAULT_FORMULA, all_stats = false
+  #   formula_name ||= DEFAULT_FORMULA
 
-    @engine = Odyssey::Engine.new(formula_name)
-    score = @engine.score(text)
+  #   @engine = Odyssey::Engine.new(formula_name)
+  #   score = @engine.score(text)
 
-    return @engine.get_stats if all_stats
+  #   return @engine.get_stats if all_stats
 
-    score
-  end
-
-  def self.analyze_multi(text, formula_names, all_stats = false)
-    raise Odyssey::ArgumentError, "You must supply at least one formula" if formula_names.empty?
-
-    scores = {}
-    @engine = Odyssey::Engine.new(formula_names[0])
-    scores[formula_names[0]] = @engine.score(text)
-
-    formula_names.drop(1).each do |formula_name|
-      @engine.update_formula(formula_name)
-      scores[formula_name] = @engine.score("", false)
-    end
-
-    return scores unless all_stats
-
-    all_stats = @engine.get_stats(false)
-    all_stats['scores'] = scores
-    all_stats
-  end
-
-  def self.analyze_all(text)
-    analyze_multi text, FORMULAS, true
-  end
-
-  #run whatever method was given as if it were a shortcut to a formula
-  def self.method_missing(method_name, *args, &block)
-    #send to the main method
-    formula_class = method_name.to_s.split("_").map(&:capitalize).join
-    super unless Object.const_defined? formula_class
-    analyze(args[0], formula_class, args[1] || false)
-  end
+  #   score
+  # end
 end
 
-require 'odyssey/engine'
-require 'odyssey/refinements'
-require 'odyssey/formulas/formula'
+require "odyssey/engine"
+require "odyssey/refinements"
+require "odyssey/formulas/formula"
 
-require 'odyssey/formulas/ari'
-require 'odyssey/formulas/coleman_liau'
-require 'odyssey/formulas/fake_formula'
-require 'odyssey/formulas/flesch_kincaid_gl'
-require 'odyssey/formulas/flesch_kincaid_re'
-require 'odyssey/formulas/gunning_fog'
-require 'odyssey/formulas/smog'
+require "odyssey/formulas/ari"
+require "odyssey/formulas/coleman_liau"
+require "odyssey/formulas/fake_formula"
+require "odyssey/formulas/flesch_kincaid_gl"
+require "odyssey/formulas/flesch_kincaid_re"
+require "odyssey/formulas/gunning_fog"
+require "odyssey/formulas/smog"
