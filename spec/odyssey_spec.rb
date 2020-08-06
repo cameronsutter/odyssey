@@ -9,13 +9,16 @@ def fake_scores name
 end
 
 module Odyssey
-  Result = Struct.new(
-    :formulas,
-    :text,
-    :scores,
-    :letters,
-    :keyword_init => true
-  ) do
+  class Result
+    attr_accessor :formulas, :text, :scores, :letters
+
+    def initialize(**opts)
+      @formulas = opts[:formulas]
+      @text     = opts[:text]
+      @scores   = opts[:scores]
+      @letters  = opts[:letters]
+    end
+
     def average_words_per_sentence
       3
     end
@@ -34,6 +37,13 @@ module Odyssey
 
     def words
       text.chars
+    end
+
+    def ==(r)
+      formulas == r.formulas &&
+        text == r.text &&
+        scores == r.scores &&
+        letters == r.letters
     end
   end
 
